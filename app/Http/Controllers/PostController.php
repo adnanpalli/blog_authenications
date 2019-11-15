@@ -15,7 +15,6 @@ class PostController extends Controller
     public function index()
     {
         $posts = DB::table('posts')->orderBy('id','desc')->paginate(5);
-
         $postss = Post::all();
         return view('posts.index')->with('posts',$posts)->with('postss',$postss);
        
@@ -50,6 +49,7 @@ class PostController extends Controller
         $post = new Post;
         $post->title = $request->title;
         $post->body = $request->body;
+        $post->slug = $request->title.":"."slug";
         $post->save();
 
         Session::flash('success','New post has been created!!');
