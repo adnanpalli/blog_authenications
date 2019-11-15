@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="col-md-8">
-      
+      <!--NEW COMMENT ADDED-->
         @foreach($posts as $post)
         <div class="post">
           <h2>{{  $post->title }}</h2>
