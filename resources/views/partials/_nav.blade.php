@@ -17,20 +17,41 @@
         <li class="{{ Request::is('/')? "active" : "" }}">
         <a href="/">Home <span class="sr-only">(current)</span></a></li>
         <li class="{{ Request::is('about')? "active" : "" }}"><a href="/about">About</a></li>
-        <li class="{{ Request::is('contact')? "active" : ""}}"><a href="/contact">Contact</a></li>
+        <li class="{{ Request::is('contact')? "active" : ""}}"><a href="/contact">Contact</a>
+
+        </li>
         
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        @guest
+        <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                                @endif
+        @else
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="post/create">Create Post</a></li>
-            <li><a href="#">Another action</a></li>
+            <li><a href="{{route('post.index') }}"> Post</a></li>
+            <li><a href="/about">Another action</a></li>
             <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li>
+              <a class="dropdown-item" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+              {{ __('Logout') }}
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+              </form>
+              </a>
+            </li>
+        @endguest
           </ul>
         </li>
       </ul>

@@ -15,8 +15,13 @@
     		{{ Form::label('title', 'Title') }}
     		{{ Form::text('title',null,array('class'=>'form-control','data-parsley-required'=>'','maxlength'=>'255')) }}
 
+        {{ Form::label('slug', 'Slug') }}
+        {{ Form::text('slug',null,array('class'=>'form-control','data-parsley-required'=>'','maxlength'=>'255','minlength'=>'5')) }}
+
     		{{ Form::label('body', 'Post Body') }}
     		{{ Form::textarea('body',null,array('class=form-control','data-parsley-required'=>'')) }}
+
+       
 
     		{{ Form::submit('Save post',array('class'=>'btn btn-success btn-block','style'=>'margin-top:20px'))}}
 		{!! Form::close() !!}

@@ -1,4 +1,5 @@
 <?php
+namespace App\Http\Controllers\Auth;
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +20,11 @@ class PostController extends Controller
         return view('posts.index')->with('posts',$posts)->with('postss',$postss);
        
     }
-
+   
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -31,7 +36,7 @@ class PostController extends Controller
         return view('posts.create');
 
     }
-
+   
     /**
      * Store a newly created resource in storage.
      *
@@ -42,14 +47,15 @@ class PostController extends Controller
     {
         
         $validatedData = $request->validate([
-             'title' => ['required', 'unique:posts', 'max:255'],
-            'body' => ['required'],
+              'title' => 'required|unique:posts|max:255',
+        'body' => 'required',
+        'slug' => 'required|alpha_dash|min:5|max:255'
         ]);
 
         $post = new Post;
         $post->title = $request->title;
         $post->body = $request->body;
-        $post->slug = $request->title.":"."slug";
+        $post->slug = $request->slug;
         $post->save();
 
         Session::flash('success','New post has been created!!');
@@ -90,14 +96,26 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-         
-        $validatedData = $request->validate([
-             'title' => ['required', 'max:255'],
-            'body' => ['required'],
-        ]);
-
         $post = Post::find($id);
+        if($post->slug != $request->slug)
+        {
+            $validatedData = $request->validate([
+                'title' => 'required|max:255',
+                'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
+                'body' => 'required',
+            ]);
+        }
+        else
+        {
+             $validatedData = $request->validate([
+                'title' => 'required|max:255',
+                'slug' => 'required|alpha_dash|min:5|max:255',
+                'body' => 'required',
+            ]);
+        }
+        
         $post->title = $request->title;
+        $post->slug = $request->slug;    
         $post->body = $request->body;
         $post->save();
 

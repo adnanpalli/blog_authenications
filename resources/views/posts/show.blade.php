@@ -5,19 +5,23 @@
 
 <div class="row">
 	<div class="col-md-8">
-		<h1 class="text-primary">{{$post->title}}</h1>
-		<p class="text-primary">{{$post->body}}</p>
+		<h1>{{$post->title}}</h1>
+		<p class="lead">{{$post->body}}</p>
 		<b> created at : {{ $post->created_at}}
 	</div>
 	<div class="col-md-4">
 		<div class="well">
 			<dl class="dl-horizontal">
-				<dt>Created at: </dt>
-				<dd>{{ date('F d Y h:ia',strtotime($post->created_at)) }} </dd>
+				<label>Slug </label>
+				<p><a href="{{ url('blog/'.$post->slug) }}">{{ url($post->slug) }} </a> </p>
 			</dl>	
 			<dl class="dl-horizontal">
-				<dt>Updated at: </dt>
-				<dd>{{ date('F d Y h:ia',strtotime($post->updated_at)) }} </dd>
+				<label>Created at: </label>
+				<p>{{ date('F d Y h:ia',strtotime($post->created_at)) }} </p>
+			</dl>	
+			<dl class="dl-horizontal">
+				<label>Updated at: </label>
+				<p>{{ date('F d Y h:ia',strtotime($post->updated_at)) }} </p>
 			</dl>	
 		
 			<div class="row">

@@ -15,6 +15,9 @@
     		{{ Form::label('title', 'Title') }}
     		{{ Form::text('title',$post->title,array('class'=>'form-control','data-parsley-required'=>'','maxlength'=>'255')) }}
 
+        {{ Form::label('slug', 'Slug') }}
+        {{ Form::text('slug',$post->slug,array('class'=>'form-control','data-parsley-required'=>'','maxlength'=>'255')) }}
+
     		{{ Form::label('body', 'Post Body') }}
     		{{ Form::textarea('body',$post->body,array('class=form-control','data-parsley-required'=>'')) }}
 
