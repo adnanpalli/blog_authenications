@@ -23,7 +23,7 @@
         {{ Form::select('category_id',$categories,null,array('class'=>'form-control')) }}
 
         {{ Form::label('tags', 'Tags') }}
-        {{ Form::select('tags[]',$tags,null,array('class'=>'form-control basic-multiple',
+        {{ Form::select('tags[]',$tags,null,array('class'=>'form-control multiple',
         'multiple'=>'multiple')) }}        
 
     		{{ Form::label('body', 'Post Body') }}
@@ -41,5 +41,7 @@
   {!! Html::script('js/select2.min.js') !!}
   <script type="text/javascript">
     
-    $('.basic-multiple').select2();
+    $('.multiple').select2();
+    $('.multiple').select2().val( {!! json_encode($post->tags()->allRelatedIds()) !!} ).trigger('change');
+   </script> 
 @endsection
