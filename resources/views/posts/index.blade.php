@@ -11,7 +11,8 @@
           <thead>
             <th>#</th>
             <th>Title</th>
-            <th>Subject</th>
+            <th>Category</th>
+             <th>Subject</th>
             <th>view</th>
             <th>edit</th>
           </thead>
@@ -21,6 +22,7 @@
             <tr>
             <td>{{ $post->id }} </td> 
             <td>{{ $post->title }} </td> 
+            <td>{{ $post->title }}</td>
             <td></td>
              <td> <?php
                echo link_to_route('post.show', $title = 'view', $parameters = [$post->id], $attributes = []); ?>

@@ -8,12 +8,23 @@
 		<h1>{{$post->title}}</h1>
 		<p class="lead">{{$post->body}}</p>
 		<b> created at : {{ $post->created_at}}
+
+		<hr>
+		<div class="tag">
+			@foreach($post->tags as $tag)
+			<span class="badge"> {{ $tag->name }}</span>
+			@endforeach
+		</div>
 	</div>
 	<div class="col-md-4">
 		<div class="well">
 			<dl class="dl-horizontal">
 				<label>Slug </label>
 				<p><a href="{{ url('blog/'.$post->slug) }}">{{ url($post->slug) }} </a> </p>
+			</dl>	
+			<dl class="dl-horizontal">
+				<label>category: </label>
+				<p>{{ $post->category->title }} </p>
 			</dl>	
 			<dl class="dl-horizontal">
 				<label>Created at: </label>

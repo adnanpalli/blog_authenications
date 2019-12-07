@@ -10,7 +10,7 @@
 		<p class="lead">{{$post->body}}</p>
 		<b> created at : {{ date('d M Y h:ia',strtotime($post->created_at)) }} <br>
 		<b> updated at : {{ date('d M Y h:ia',strtotime($post->updated_at)) }} <br>
-		
+		<hr><p>category :   {{ $post->category->title }} </p>
 	</div>
 	
 </div>

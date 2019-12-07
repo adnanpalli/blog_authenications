@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Post;
+use App\Tag;
+use App\Category;
 use Session;
 class PostController extends Controller
 {
@@ -32,9 +34,9 @@ class PostController extends Controller
      */
     public function create()
     {
-
-        return view('posts.create');
-
+        $category = Category::all();
+        $tags = Tag::all();
+        return view('posts.create')->with('categories',$category)->with('tags',$tags);
     }
    
     /**
@@ -45,18 +47,22 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //dd($request);
         $validatedData = $request->validate([
               'title' => 'required|unique:posts|max:255',
+              'category_id' => 'required|integer',
         'body' => 'required',
         'slug' => 'required|alpha_dash|min:5|max:255'
         ]);
 
         $post = new Post;
         $post->title = $request->title;
+        $post->category_id = $request->category_id;
         $post->body = $request->body;
         $post->slug = $request->slug;
         $post->save();
+
+        $post->tags()->sync($request->tags,false);
 
         Session::flash('success','New post has been created!!');
         return redirect()->route('post.show',$post->id);
@@ -84,7 +90,24 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-        return view('posts.edit')->with('post',$post);
+        $categorys = Category::all();
+        $tags = Tag::all();
+
+        $cats = array();
+        foreach($categorys as $category)
+        {
+            $cats[$category->id] = $category->title;
+        }
+
+        $tags2 = array();
+        foreach($tags as $tag)
+        {
+            $tags2[$tag->id] = $tag->name;
+        }
+
+
+        return view('posts.edit')->with('post',$post)
+        ->with('categories',$cats)->with('tags',$tags2);
     }
 
     /**
@@ -103,6 +126,7 @@ class PostController extends Controller
                 'title' => 'required|max:255',
                 'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
                 'body' => 'required',
+                'category_id' => 'required|integer'
             ]);
         }
         else
@@ -111,12 +135,14 @@ class PostController extends Controller
                 'title' => 'required|max:255',
                 'slug' => 'required|alpha_dash|min:5|max:255',
                 'body' => 'required',
+                'category_id' => 'required|integer'
             ]);
         }
         
         $post->title = $request->title;
         $post->slug = $request->slug;    
         $post->body = $request->body;
+        $post->category_id = $request->category_id;
         $post->save();
 
         Session::flash('success','updated successfully!!');
