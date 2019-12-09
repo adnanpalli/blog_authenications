@@ -27,7 +27,15 @@
      
     </div>
     <div class="col-md-3">
-   
+      <h2 align="center">All Categories</h2>
+      <br>
+      @foreach($catgories as $category)
+        <div class="post">
+          <a align="center" href=" {{ route( 'blog.shows',$category->id) }}"> {{ $category->title }} </a>
+          
+         </div>
+         <hr>
+       @endforeach
     </div>
   </div>
 

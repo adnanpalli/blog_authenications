@@ -142,6 +142,15 @@ class PostController extends Controller
         $post->category_id = $request->category_id;
         $post->save();
 
+        if(isset($request->tags))
+        {
+            $post->tags()->sync($request->tags,true);
+        }     
+        else
+        {
+            $post->tags()->sync(array());
+        }
+
         Session::flash('success','updated successfully!!');
         return redirect()->route('post.show',$post->id);
     }
@@ -157,6 +166,9 @@ class PostController extends Controller
     {
 
         $post = Post::find($id);
+
+        $post->tags()->detach();
+
         $post->delete();
         Session::flash('success','deleted successfully!!');
         return redirect()->route('post.index');

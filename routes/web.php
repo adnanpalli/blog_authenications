@@ -14,10 +14,14 @@
 Route::resource('category','CategoryController');
 Route::resource('post','PostController');
 Route::resource('tag','TagController');
+Route::post('contact','PagesController@sendEmail');
 Route::get('contact','PagesController@getContact');
 Route::get('about','PagesController@getAbout');
 Route::get('blog/{slug}',['as'=>'blog.view','uses'=>'BlogController@getsingle']);
 Route::get('blog',['as'=>'blog.index','uses'=>'BlogController@getindex']);
+
+Route::get('catblog/{id}',['as'=>'blog.shows','uses'=>'PagesController@getblogbycatgory']);
+
 Route::get('/','PagesController@getIndex');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

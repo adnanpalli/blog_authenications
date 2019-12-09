@@ -4,9 +4,9 @@
 @section('content')
 
 <div class="row">
-	<div class="col-md-12">
-		<h1>{{$cat->title}}</h1>
-		<b> created at : {{ $cat->created_at}}
+	<div class="col-md-8 col-md-offset-2">
+		<h1 align="center">CATEGORY : {{$cat->title}}</h1>
+		
 
 		<div>
 			<table class="table">

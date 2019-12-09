@@ -11,15 +11,21 @@
           <thead>
             <th>#</th>
             <th>Title</th>
-            
+            <th>Delete</th>
           </thead>
           
           <tbody>
           @foreach($tags as $tag)
             <tr>
             <td>{{ $tag->id }} </td> 
-            <td>{{ $tag->name }} </td> 
-            
+            <td><a href="{{ route('tag.show',$tag->id)}}">{{ $tag->name }} </a></td> 
+          
+            <td>
+              {!! Form::open(['route' => ['tag.destroy',$tag->id], 'method' => 'delete']) !!}
+              {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+              {!! Form::close() !!}
+
+            </td>
             </tr>
           </tbody>
           @endforeach

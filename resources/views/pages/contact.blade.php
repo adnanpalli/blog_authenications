@@ -1,36 +1,40 @@
 @extends('main')
 @section('title','| Contact me')
 @section('content')
-  <h1>Contact Me</h1>
+  
   <div class="row">
-    <div class="col-md-8">
-      
-        
-          <form action="">
-            <div class="form-group">
-            <label for="email">Email address:</label>
-            <input type="email" class="form-control" id="email">
-            </div>
-            <div class="form-group">
-            <label for="subject">Message:</label>
-            <input type="text" class="form-control" id="subject">
-            </div>
-            <div class="form-group">
-            <label for="body">Body:</label>
-            <textarea type="text" class="form-control" id="body"></textarea>
-            </div>
-            
-          <input type="submit" class="btn btn-primary" value="submit">
-          </form>
-        <!--
-        <p>...</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-        -->
-      
+    <div class="col-md-8 col-md-offset-2">
+    <h1 align="center">Contact Me</h1>     
+<form class="form-horizontal" action="{{ url('contact')}}" method="POST">
+    {{ csrf_field() }}
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Name:</label>
+    <div class="col-sm-10">
+      <input type="name" name="name" class="form-control" id="name" placeholder="Enter name">
     </div>
-    <div class="col-md-4">
-      <h1> Adress </h1>
-      <p class="text-info">my address </p>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Email:</label>
+    <div class="col-sm-10"> 
+      <input type="email" name="email" class="form-control" id="email" placeholder="Enter email">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="message">Message:</label>
+    <div class="col-sm-10"> 
+      <textarea id="message" name="message" class="form-control" >Enter your message here....
+      </textarea>
+    </div>
+  </div>
+
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</form>
+      
     </div>
   </div>
   @endsection
