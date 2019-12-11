@@ -9,6 +9,9 @@
 	<div class="col-md-8 col-md-offset-2">
 		
 		<h1>{{$post->title}}</h1>
+		@if(isset($post->image))
+			<img src ="{{ asset('images/'.$post->image) }}">
+		@endif
 		<p class="lead">{!!$post->body !!}</p>
 		<div class="dates_created">
 		<p> created at : {{ date('d M Y h:ia',strtotime($post->created_at)) }}

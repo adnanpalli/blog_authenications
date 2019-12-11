@@ -6,6 +6,9 @@
 <div class="row">
 	<div class="col-md-8">
 		<h1>{{$post->title}}</h1>
+		@if(isset($post->image))
+			<img src ="{{ asset('images/'.$post->image) }}">
+		@endif
 		<p class="lead">{!! $post->body !!}</p>
 		<b> created at : {{ $post->created_at}}
 

@@ -14,14 +14,17 @@
     <div class="col-md-8 col-md-offset-2">
       <h1>Edit post</h1>
      
-        {{ Form::open(array('method'=>'PUT','route' => ['post.update', $post->id,'data-parsley-validate'=>''])) }}
+        {{ Form::open(array('method'=>'PUT','route' => ['post.update', $post->id,'data-parsley-validate'=>''],'files'=>true)) }}
       	
-    		
     		{{ Form::label('title', 'Title') }}
     		{{ Form::text('title',$post->title,array('class'=>'form-control','data-parsley-required'=>'','maxlength'=>'255')) }}
 
         {{ Form::label('slug', 'Slug') }}
-        {{ Form::text('slug',null,array('class'=>'form-control','data-parsley-required'=>'','maxlength'=>'255')) }}
+        {{ Form::text('slug',$post->slug,array('class'=>'form-control','data-parsley-required'=>'','maxlength'=>'255')) }}
+
+        {{ Form::label('featured_image', 'Upload image') }}
+        {{ Form::file('featured_image',null,array('class'=>'form-control')) }}
+
 
         {{ Form::label('category_id', 'Category') }}
         {{ Form::select('category_id',$categories,null,array('class'=>'form-control')) }}
