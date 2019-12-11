@@ -22,6 +22,9 @@ Route::get('blog',['as'=>'blog.index','uses'=>'BlogController@getindex']);
 
 Route::get('catblog/{id}',['as'=>'blog.shows','uses'=>'PagesController@getblogbycatgory']);
 
+Route::post('c/{post_id}',['as'=>'comment.save','uses'=>'CommentController@store']);
+
+
 Route::get('/','PagesController@getIndex');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

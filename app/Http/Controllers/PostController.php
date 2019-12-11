@@ -8,6 +8,7 @@ use App\Post;
 use App\Tag;
 use App\Category;
 use Session;
+use Purifier;
 class PostController extends Controller
 {
     /**
@@ -58,7 +59,7 @@ class PostController extends Controller
         $post = new Post;
         $post->title = $request->title;
         $post->category_id = $request->category_id;
-        $post->body = $request->body;
+        $post->body = Purifier::clean($request->body);
         $post->slug = $request->slug;
         $post->save();
 
@@ -137,8 +138,8 @@ class PostController extends Controller
         }
         
         $post->title = $request->title;
-        $post->slug = $request->slug;    
-        $post->body = $request->body;
+        $post->slug = $request->slug;
+        $post->body = Purifier::clean($request->body);    
         $post->category_id = $request->category_id;
         $post->save();
 

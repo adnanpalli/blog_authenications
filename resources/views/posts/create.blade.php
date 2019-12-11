@@ -3,6 +3,11 @@
 @section('stylesheets')
 	{!! Html::style('css/parsley.css') !!}
   {!! Html::style('css/select2.min.css') !!}
+  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+  <script>tinymce.init({selector:'textarea'
+
+});</script>
 @endsection
 @section('content')
 
@@ -32,10 +37,10 @@
 
 
         {{ Form::label('slug', 'Slug') }}
-        {{ Form::text('slug',null,array('class'=>'form-control','data-parsley-required'=>'','maxlength'=>'255','minlength'=>'5')) }}
+        {{ Form::text('slug',null,array('class'=>'form-control','data-parsley-required'=>'','maxlength'=>'255','minlength'=>'10')) }}
 
     		{{ Form::label('body', 'Post Body') }}
-    		{{ Form::textarea('body',null,array('class=form-control','data-parsley-required'=>'')) }}
+    		{{ Form::textarea('body',null,array('class=form-control')) }}
 
        
 

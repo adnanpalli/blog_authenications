@@ -18,7 +18,7 @@
         @foreach($posts as $post)
         <div class="post">
           <h2>{{  $post->title }}</h2>
-           <p>{{ substr($post->body,0,250)}}............</p>
+           <p>{!! substr(strip_tags($post->body),0,250)  !!}............</p>
           <a href="{{ route('blog.view',$post->slug)}}" class="btn btn-primary"> Read more..</a>
           <p> Created At : {{ $post->created_at }} </p>
          </div>

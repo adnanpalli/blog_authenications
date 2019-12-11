@@ -1,5 +1,5 @@
 @extends('main')
-@section('title','| Create Post')
+@section('title','| Category wise blog')
 
 @section('content')
 

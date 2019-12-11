@@ -1,0 +1,56 @@
+
+.comment{
+	margin-top: 25px;
+}
+
+.comment-person_img
+{
+	width:50px;
+	height: 50px;
+	/*border-radius: 50%;*/
+	float: left;
+}
+
+.comment-person
+{
+	margin-left: 10px;
+	float: left;
+}
+
+.comment-person h4
+{
+	margin:5px 0px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+
+
+.comment-content{
+	clear:both;
+	margin-left: 65px;
+	font-size: 12px;
+}
+
+.created{
+	font-size: 10px;
+	font-style: italic;
+	color: #aaa;
+}
+
+.comment-title
+{
+	margin-bottom: 24px;
+}
+
+.dates_created
+{
+	font-style: italic;
+	font-size: 12px;
+	color: #aaa;
+}
+.cats
+{
+	font-size: 16px;
+	font-weight: bold;
+}
