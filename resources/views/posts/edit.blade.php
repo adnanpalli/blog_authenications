@@ -14,7 +14,7 @@
     <div class="col-md-8 col-md-offset-2">
       <h1>Edit post</h1>
      
-        {{ Form::open(array('method'=>'PUT','route' => ['post.update', $post->id,'data-parsley-validate'=>''],'files'=>true)) }}
+        {{ Form::open(array('method'=>'PUT','route' => ['post.update', $post->id],'data-parsley-validate'=>'','files'=>true)) }}
       	
     		{{ Form::label('title', 'Title') }}
     		{{ Form::text('title',$post->title,array('class'=>'form-control','data-parsley-required'=>'','maxlength'=>'255')) }}

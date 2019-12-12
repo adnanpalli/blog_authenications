@@ -14,6 +14,8 @@
 		@endif
 		<p class="lead">{!!$post->body !!}</p>
 		<div class="dates_created">
+		<h3> Author : {{ $post->user->name }}
+		</h3>>
 		<p> created at : {{ date('d M Y h:ia',strtotime($post->created_at)) }}
 		</p>
 		<p> updated at : {{ date('d M Y h:ia',strtotime($post->updated_at)) }}

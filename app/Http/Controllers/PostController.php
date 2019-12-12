@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Tag;
 use App\Category;
+use Auth;
 use Session;
 use Purifier;
 use Image;
@@ -57,10 +58,10 @@ class PostController extends Controller
         'body' => 'required',
         'slug' => 'required|alpha_dash|min:5|max:255',
         'featured_image' =>'sometimes|image'
-        ]);
-
+        ]); 
         $post = new Post;
         $post->title = $request->title;
+        $post->user_id = Auth::user()->id;
         $post->category_id = $request->category_id;
         $post->body = Purifier::clean($request->body);
         $post->slug = $request->slug;
@@ -105,6 +106,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
+        $this->authorize('update',$post);
         $categorys = Category::all();
         $tags = Tag::all();
 
@@ -131,8 +133,11 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post = Post::find($id);
         
+
+        $post = Post::find($id);
+        //this below code is to restrict authors to edit/ update others posts
+        $this->authorize('update',$post);
             $validatedData = $request->validate([
                 'title' => 'required|max:255',
                 'slug' => "required|alpha_dash|min:5|max:255|unique:posts,slug,$id",
@@ -188,7 +193,9 @@ class PostController extends Controller
     {
 
         $post = Post::find($id);
-
+        //this below code is to restrict authors to delete others posts
+        $this->authorize('delete',$post);
+        
         $post->tags()->detach();
         Storage::delete($post->image);
         $post->delete();

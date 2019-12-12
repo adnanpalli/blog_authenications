@@ -12,7 +12,7 @@
             <th>#</th>
             <th>Title</th>
             <th>Category</th>
-             <th>Subject</th>
+             <th>Author</th>
             <th>view</th>
             <th>edit</th>
           </thead>
