@@ -14,7 +14,7 @@ class CreatePostag extends Migration
     public function up()
     {
         Schema::create('post_tag', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->unsignedInteger('post_id');
             $table->unsignedInteger('tag_id');
             $table->timestamps();
@@ -33,6 +33,10 @@ class CreatePostag extends Migration
      */
     public function down()
     {
+        Schema::table('post_tag', function (Blueprint $table) {
+            $table->dropForeign('post_tag_post_id_foreign');
+            $table->dropForeign('post_tag_tag_id_foreign');
+        });
         Schema::dropIfExists('post_tag');
     }
 }
