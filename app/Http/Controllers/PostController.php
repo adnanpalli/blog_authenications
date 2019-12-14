@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Tag;
+use App\User;
 use App\Category;
+use App\Role;
 use Auth;
 use Session;
 use Purifier;
@@ -78,6 +80,7 @@ class PostController extends Controller
 
         $post->save();
 
+        //to save tags in post_tag table
         $post->tags()->sync($request->tags,false);
 
         Session::flash('success','New post has been created!!');
@@ -94,7 +97,9 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return view('posts.show')->with('post',$post);
+        $loginuser_id = Auth::user()->id;
+        $user = User::find($loginuser_id);
+        return view('posts.show')->with('post',$post)->with('user',$user);
     }
 
     /**

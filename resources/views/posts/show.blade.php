@@ -23,6 +23,12 @@
 	<div class="col-md-4">
 		<div class="well">
 			<dl class="dl-horizontal">
+				<label>My Role : </label>
+				@foreach ($user->roles as $role) 
+             		{{ $role->name  }}
+        	 @endforeach
+			</dl>
+			<dl class="dl-horizontal">
 				<label>Author : </label>
 				<b> {{ $post->user->name }} </b>
 			</dl>

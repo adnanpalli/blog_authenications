@@ -20,6 +20,10 @@ class CategoryController extends Controller
      public function __construct()
     {
         $this->middleware('auth');
+
+        //if this user have permission of admin or super admin then only he can access this resourse
+        $this->middleware('roles:user');
+
     }
     /**
      * Show the form for creating a new resource.
@@ -28,6 +32,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        
         return view('category.create');
     }
 
@@ -72,6 +77,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::find($id);
+        $this->authorize('update',$category);
         return view('category.edit')->with('category',$category);
     }
 
@@ -85,7 +91,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $category = Category::find($id);
-
+         $this->authorize('update',$category);
              $validatedData = $request->validate([
                 'title' => 'required|max:255'
             ]);
@@ -107,6 +113,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
+        $this->authorize('update',$category);
         $category->delete();
         Session::flash('success','deleted successfully!!');
         return redirect()->route('category.index');

@@ -21,6 +21,7 @@ class TagController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('roles:user');
     }
     /**
      * Show the form for creating a new resource.

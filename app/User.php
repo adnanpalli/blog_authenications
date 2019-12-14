@@ -41,4 +41,19 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Post');
     }
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role');
+    }
+    public function hasRole($role)
+    {
+       if($this->roles()->where('name',$role)->first())
+       {
+            //if loggedin user have user permission it return true
+            return true;
+       }
+
+       return false;
+    }
+
 }

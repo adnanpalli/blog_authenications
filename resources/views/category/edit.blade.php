@@ -9,7 +9,7 @@
     <div class="col-md-8 col-md-offset-2">
       <h1>Edit Category</h1>
      
-        {{ Form::open(array('method'=>'PUT','route' => ['category.update', $category->id,'data-parsley-validate'=>''])) }}
+        {{ Form::open(array('method'=>'PUT','route' => ['category.update', $category->id],'data-parsley-validate'=>'')) }}
       	
     		{{ Form::label('title', 'Title') }}
     		{{ Form::text('title',$category->title,array('class'=>'form-control','data-parsley-required'=>'','maxlength'=>'255')) }}

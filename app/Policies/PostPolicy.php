@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Post;
 use App\User;
+use Auth;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PostPolicy
@@ -53,7 +54,19 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        return $user->id === $post->user_id;
+        $role = User::find($user->id)->roles()->orderBy('name')->get();
+        foreach($role as $rol){
+            $role_id =  $rol->id;
+        }
+        if($role_id==3)
+        {
+            return true;
+        }
+        else
+        {
+            return $user->id === $post->user_id ;
+        }
+        
     }
 
     /**
