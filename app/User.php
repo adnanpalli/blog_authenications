@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use Auth;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -54,6 +54,31 @@ class User extends Authenticatable
        }
 
        return false;
+    }
+    public function isAdmin()
+    {
+        $isAdmin = false;
+        $isAdmin = !$this->roles->filter(function($item) {
+            return ($item->id==2);
+        })->isEmpty();
+        return $isAdmin;
+    }
+    public function issuperAdmin()
+    {
+        $issuperAdmin = false;
+        $issuperAdmin = !$this->roles->filter(function($item) 
+        {
+            return ($item->id==3);
+        })->isEmpty();
+        return $issuperAdmin;
+    }
+    public function isUser()
+    {
+        $isUser = false;
+        $isUser = !$this->roles->filter(function($item) {
+            return ($item->id==1);
+        })->isEmpty();
+        return $isUser;
     }
 
 }

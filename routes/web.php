@@ -21,10 +21,15 @@ Route::get('blog/{slug}',['as'=>'blog.view','uses'=>'BlogController@getsingle'])
 Route::get('blog',['as'=>'blog.index','uses'=>'BlogController@getindex']);
 
 Route::get('catblog/{id}',['as'=>'blog.shows','uses'=>'PagesController@getblogbycatgory']);
-
 Route::post('c/{post_id}',['as'=>'comment.save','uses'=>'CommentController@store']);
-
-
 Route::get('/','PagesController@getIndex');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/superadmin', 'SuperadminController@index')->name('superadmin');
+Route::get('/admin', 'AdminController@index')->name('admin');
+Route::get('/user', 'UserController@index')->name('user');
+
+
+

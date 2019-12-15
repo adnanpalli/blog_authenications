@@ -1,6 +1,8 @@
 @extends('main')
 @section('title','| home')
-
+@section('stylesheets')
+  {!! Html::style('css/style.css') !!}
+@endsection
 @section('content')
   <div class="row">
     <div class="col-md-12">
@@ -19,8 +21,8 @@
         <div class="post">
           <h2>{{  $post->title }}</h2>
            <p>{!! substr(strip_tags($post->body),0,250)  !!}............</p>
-          <a href="{{ route('blog.view',$post->slug)}}" class="btn btn-primary"> Read more..</a>
-          <p> Created At : {{ $post->created_at }} </p>
+          <a href="{{ route('blog.view',$post->slug)}}" > Read more..</a>
+          <p class="created"> Created At : {{ $post->created_at }} </p>
          </div>
          <hr>
        @endforeach
