@@ -9,7 +9,7 @@
 
 <div class="panel panel-info">
   <div class="panel-heading">
-    <h3 class="panel-title">MY POST ( {{ $myposts->count() }} )<span class="glyphicon glyphicon-bullhorn" aria-hidden="true" align="right"></span></h3>
+    <h3 class="panel-title">{{ strtoupper(Auth::user()->name)."'S POST" }} ( {{ $myposts->count() }} )<span class="glyphicon glyphicon-bullhorn" aria-hidden="true" align="right"></span></h3>
   </div>
   <div class="panel-body">
   <div class="row">
@@ -60,7 +60,7 @@
           <thead>
             <th>#</th>
             <th>Title</th>
-            <th>Publish</th>
+            <th>Status</th>
             <th>view</th>
             <th>edit</th>
           </thead>
@@ -70,7 +70,11 @@
             <tr>
             <td>{{ $post->id }} </td> 
             <td>{{ $post->title }} </td> 
-            <td></td> 
+            @if($post->status == 0)
+            <td>Not Published</td>
+            @else
+            <td>Published</td>
+            @endif
              <td> <?php
                echo link_to_route('post.show', $title = 'view', $parameters = [$post->id], $attributes = []); ?>
             </td>
@@ -88,5 +92,6 @@
   <div class="panel-footer"></div>
 </div>
   @endsection
+
 
 

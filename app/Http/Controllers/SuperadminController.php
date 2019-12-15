@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Post;
 use Auth;
+use Session;
 class SuperadminController extends Controller
 {
     public function __construct()
@@ -91,5 +92,22 @@ class SuperadminController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function publish($id)
+    {
+        $post = Post::find($id);
+        $post->status = 1;
+        $post->save();
+        Session::flash('success','published successfully!!');
+        return redirect()->route('post.show',$id);
+    }
+    public function unpublish($id)
+    {
+        $post = Post::find($id);
+        $post->status = 0;
+        $post->save();
+        Session::flash('success','unpublished successfully!!');
+        return redirect()->route('post.show',$id);
     }
 }

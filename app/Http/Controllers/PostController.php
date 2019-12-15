@@ -65,6 +65,7 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->user_id = Auth::user()->id;
         $post->category_id = $request->category_id;
+        $post->status = 0;
         $post->body = Purifier::clean($request->body);
         $post->slug = $request->slug;
 
@@ -207,4 +208,6 @@ class PostController extends Controller
         Session::flash('success','deleted successfully!!');
         return redirect()->route('post.index');
     }
+
+   
 }

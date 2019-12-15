@@ -11,8 +11,8 @@
           <thead>
             <th>#</th>
             <th>Title</th>
-            <th>Category</th>
-             <th>Author</th>
+            
+             <th>status</th>
             <th>view</th>
             <th>edit</th>
           </thead>
@@ -21,9 +21,14 @@
           @foreach($posts as $post)
             <tr>
             <td>{{ $post->id }} </td> 
-            <td>{{ $post->title }} </td> 
+            
             <td>{{ $post->title }}</td>
-            <td></td>
+            @if($post->status == 0)
+            <td>Not Published</td>
+            @else
+            <td>Published</td>
+            @endif
+            
              <td> <?php
                echo link_to_route('post.show', $title = 'view', $parameters = [$post->id], $attributes = []); ?>
             </td>

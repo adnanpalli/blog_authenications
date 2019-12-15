@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Auth;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class AdminController extends Controller
 {
     
@@ -19,8 +19,11 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $myid = Auth::user()->id;
+        $myposts = DB::table('posts')->where('user_id',$myid)->get();
         
-        return view('admin.dash');
+        return view('admin.dash')->with('myposts',$myposts);
+        
     }
 
     /**

@@ -17,9 +17,12 @@
 				@foreach($cat->posts as $post)
 				<tbody>
 					<tr>
+						@if($post->status==1)
 						<td><a href="{{route('blog.view',$post->slug)}}">
-							{{$post->title }}</a></td>
+							{{ $post->title }}</a></td>
+							
 						<td><p>{{ substr($post->body,0,50)}}......</p></td>
+						@endif
 					</tr>
 				</tbody>
 				@endforeach

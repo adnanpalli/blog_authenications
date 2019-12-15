@@ -26,6 +26,8 @@ Route::get('/','PagesController@getIndex');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
+route::get('publish/{post_id}',['as'=>'post.publish','uses'=>'SuperadminController@publish']);
+route::get('unpublish/{post_id}',['as'=>'post.unpublish','uses'=>'SuperadminController@unpublish']);
 
 Route::get('/superadmin', 'SuperadminController@index')->name('superadmin');
 Route::get('/admin', 'AdminController@index')->name('admin');

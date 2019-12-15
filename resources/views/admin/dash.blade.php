@@ -5,21 +5,53 @@
 @guest
                           
 @else
- <h1>Welcome to admin dash board : {{ Auth::user()->name }}</h1> 
+ 
 @endguest
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{ strtoupper(Auth::user()->name)."' POST" }} ( {{ $myposts->count() }} )<span class="glyphicon glyphicon-bullhorn" aria-hidden="true" align="right"></span></h3>
+  </div>
+  <div class="panel-body">
   <div class="row">
-    <div class="col-md-8">
-       <div class="card">
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                </div>
-            </div>
+    <div class="col-md-12">
+      
+     <div class="post">
+        <table class="table">
+          <thead>
+            <th>#</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th>view</th>
+            <th>edit</th>
+          </thead>
+          
+          <tbody>
+          @foreach($myposts as $post)
+            <tr>
+            <td>{{ $post->id }} </td> 
+            <td>{{ $post->title }} </td> 
+            @if($post->status==0)
+            <td>Not published</td> 
+            @else
+            <td>published</td>
+            @endif 
+             <td> <?php
+               echo link_to_route('post.show', $title = 'view', $parameters = [$post->id], $attributes = []); ?>
+            </td>
+            <td><?php
+                echo link_to_route('post.edit', $title = 'Edit', $parameters = [$post->id], $attributes = []); ?></td>
+            </tr>
+          </tbody>
+          @endforeach
+        </table>
+    </div>
+     
     </div>
   </div>
+
+   </div>
+  <div class="panel-footer"></div>
+</div>
   @endsection
 
 

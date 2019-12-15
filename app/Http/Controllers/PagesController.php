@@ -11,7 +11,7 @@ class PagesController extends Controller
     //
     public function getIndex()
     {
-    	$posts = DB::table('posts')->orderBy('id','desc')->take(5)->get();
+    	$posts = DB::table('posts')->orderBy('id','desc')->take(5)->where('status',1)->get();
         $cats = Category::all();
         return view('pages.welcome')->with('posts',$posts)->with('catgories',$cats);
     }

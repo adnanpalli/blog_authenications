@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-
+use Auth;
 class UserController extends Controller
 {
     public function __construct()
@@ -19,7 +19,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user.dash');
+         $myid = Auth::user()->id;
+        $myposts = DB::table('posts')->where('user_id',$myid)->get();
+        
+        return view('user.dash')->with('myposts',$myposts);
+        
     }
 
     /**

@@ -54,18 +54,32 @@
 			</dl>	
 		
 			<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-4">
 			<?php
 				echo link_to_route('post.edit', $title = 'Edit', $parameters = [$post->id], $attributes = ['class'=>'btn btn-primary btn-block']); ?>
 				
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-4">
 			
 
 				{!! Form::open(['route' => ['post.destroy',$post->id], 'method' => 'delete']) !!}
 				{!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block']) !!}
 				{!! Form::close() !!}
 			</div>
+			<div class="col-md-4">
+			<?php
+				if($post->status==0)
+				{
+				echo link_to_route('post.publish', $title = 'Publish', $parameters = [$post->id], $attributes = ['class'=>'btn btn-info btn-block']); 
+				}
+				else{
+					echo link_to_route('post.unpublish', $title = 'Unpublish', $parameters = [$post->id], $attributes = ['class'=>'btn btn-info btn-block']); 
+				}
+
+					?>
+				
+			</div>
+
 			</div>	
 			<div class="row" style="margin-top:5px">
 				<div class="col-md-12">
